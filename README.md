@@ -77,3 +77,51 @@ export default addresses;
 ```
 
 We will now navigate to the ```react-app``` directory so that we can make our edits in the main ```App.js``` file.
+
+We can import IPFS and initialize the node like so:
+
+```
+import IPFS from "ipfs";
+
+async function initIpfs() {
+  node = await IPFS.create();
+  const version = await node.version();
+  console.log("IPFS Node Version:", version.version);
+}
+```
+
+We can add a function to read the current file from our Solidity smart contract. Note: we are using ethers.js for certain helper functions such as ```getSigner()```, ```getAddress()```, etc.
+
+Here is an example of how that may look:
+
+```
+async function readCurrentUserFile() {
+  const result = await storageContract.userFiles(
+    defaultProvider.getSigner().getAddress()
+  );
+
+  return result;
+}
+```
+
+The next functions created willl be ```uploadFile()```, which uploads a file using our IPFS node, and ```setFile()``` that stores our IPFS hash/CID inside our function once an upload is successful. As follows is an example of what the aforementioned functions look like:
+
+```
+async function setFile(hash) {
+    const ipfsWithSigner = storageContract.connect(defaultProvider.getSigner());
+    await ipfsWithSigner.setFile(hash);
+    setIpfsHash(hash);
+}
+
+async function uploadFile(file) {
+    const files = [{ path: file.name + file.path, content: file }];
+
+    for await (const result of node.add(files)) {
+        await setFile(result.cid.string);
+    }
+}
+```
+
+Now we can move on to UI development. Since this is a bit out of scope I won't go delve too deep, but the code can be viewed in full within this repository.
+
+The final step is setting up Metamask with a new network for Ethermint on RPC url 8545. This is to ensure the contract address is recognized properly. In order to have funds to run the contract calls we can import a new account using our anvil private key.
