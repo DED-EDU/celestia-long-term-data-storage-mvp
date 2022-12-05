@@ -1,0 +1,371 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "file",
+          "type": "string"
+        }
+      ],
+      "name": "setFile",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "userFiles",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x608060405234801561001057600080fd5b506103fb806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063b0b190721461003b578063e423c15814610064575b600080fd5b61004e610049366004610130565b610079565b60405161005b9190610160565b60405180910390f35b6100776100723660046101cb565b610113565b005b600060208190529081526040902080546100929061027c565b80601f01602080910402602001604051908101604052809291908181526020018280546100be9061027c565b801561010b5780601f106100e05761010080835404028352916020019161010b565b820191906000526020600020905b8154815290600101906020018083116100ee57829003601f168201915b505050505081565b33600090815260208190526040902061012c8282610305565b5050565b60006020828403121561014257600080fd5b81356001600160a01b038116811461015957600080fd5b9392505050565b600060208083528351808285015260005b8181101561018d57858101830151858201604001528201610171565b8181111561019f576000604083870101525b50601f01601f1916929092016040019392505050565b634e487b7160e01b600052604160045260246000fd5b6000602082840312156101dd57600080fd5b813567ffffffffffffffff808211156101f557600080fd5b818401915084601f83011261020957600080fd5b81358181111561021b5761021b6101b5565b604051601f8201601f19908116603f01168101908382118183101715610243576102436101b5565b8160405282815287602084870101111561025c57600080fd5b826020860160208301376000928101602001929092525095945050505050565b600181811c9082168061029057607f821691505b6020821081036102b057634e487b7160e01b600052602260045260246000fd5b50919050565b601f82111561030057600081815260208120601f850160051c810160208610156102dd5750805b601f850160051c820191505b818110156102fc578281556001016102e9565b5050505b505050565b815167ffffffffffffffff81111561031f5761031f6101b5565b6103338161032d845461027c565b846102b6565b602080601f83116001811461036857600084156103505750858301515b600019600386901b1c1916600185901b1785556102fc565b600085815260208120601f198616915b8281101561039757888601518255948401946001909101908401610378565b50858210156103b55787850151600019600388901b60f8161c191681555b5050505050600190811b0190555056fea2646970667358221220ac5ae35e4509022520ab57a70ef3eddd8c2eda7a048f36c48f87cf0a8cfa447564736f6c634300080f0033",
+    "sourceMap": "64:171:16:-:0;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c8063b0b190721461003b578063e423c15814610064575b600080fd5b61004e610049366004610130565b610079565b60405161005b9190610160565b60405180910390f35b6100776100723660046101cb565b610113565b005b600060208190529081526040902080546100929061027c565b80601f01602080910402602001604051908101604052809291908181526020018280546100be9061027c565b801561010b5780601f106100e05761010080835404028352916020019161010b565b820191906000526020600020905b8154815290600101906020018083116100ee57829003601f168201915b505050505081565b33600090815260208190526040902061012c8282610305565b5050565b60006020828403121561014257600080fd5b81356001600160a01b038116811461015957600080fd5b9392505050565b600060208083528351808285015260005b8181101561018d57858101830151858201604001528201610171565b8181111561019f576000604083870101525b50601f01601f1916929092016040019392505050565b634e487b7160e01b600052604160045260246000fd5b6000602082840312156101dd57600080fd5b813567ffffffffffffffff808211156101f557600080fd5b818401915084601f83011261020957600080fd5b81358181111561021b5761021b6101b5565b604051601f8201601f19908116603f01168101908382118183101715610243576102436101b5565b8160405282815287602084870101111561025c57600080fd5b826020860160208301376000928101602001929092525095945050505050565b600181811c9082168061029057607f821691505b6020821081036102b057634e487b7160e01b600052602260045260246000fd5b50919050565b601f82111561030057600081815260208120601f850160051c810160208610156102dd5750805b601f850160051c820191505b818110156102fc578281556001016102e9565b5050505b505050565b815167ffffffffffffffff81111561031f5761031f6101b5565b6103338161032d845461027c565b846102b6565b602080601f83116001811461036857600084156103505750858301515b600019600386901b1c1916600185901b1785556102fc565b600085815260208120601f198616915b8281101561039757888601518255948401946001909101908401610378565b50858210156103b55787850151600019600388901b60f8161c191681555b5050505050600190811b0190555056fea2646970667358221220ac5ae35e4509022520ab57a70ef3eddd8c2eda7a048f36c48f87cf0a8cfa447564736f6c634300080f0033",
+    "sourceMap": "64:171:16:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;91:44;;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;142:91;;;;;;:::i;:::-;;:::i;:::-;;91:44;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;142:91::-;208:10;198:9;:21;;;;;;;;;;:28;222:4;198:21;:28;:::i;:::-;;142:91;:::o;14:286:18:-;73:6;126:2;114:9;105:7;101:23;97:32;94:52;;;142:1;139;132:12;94:52;168:23;;-1:-1:-1;;;;;220:31:18;;210:42;;200:70;;266:1;263;256:12;200:70;289:5;14:286;-1:-1:-1;;;14:286:18:o;305:597::-;417:4;446:2;475;464:9;457:21;507:6;501:13;550:6;545:2;534:9;530:18;523:34;575:1;585:140;599:6;596:1;593:13;585:140;;;694:14;;;690:23;;684:30;660:17;;;679:2;656:26;649:66;614:10;;585:140;;;743:6;740:1;737:13;734:91;;;813:1;808:2;799:6;788:9;784:22;780:31;773:42;734:91;-1:-1:-1;886:2:18;865:15;-1:-1:-1;;861:29:18;846:45;;;;893:2;842:54;;305:597;-1:-1:-1;;;305:597:18:o;907:127::-;968:10;963:3;959:20;956:1;949:31;999:4;996:1;989:15;1023:4;1020:1;1013:15;1039:922;1108:6;1161:2;1149:9;1140:7;1136:23;1132:32;1129:52;;;1177:1;1174;1167:12;1129:52;1217:9;1204:23;1246:18;1287:2;1279:6;1276:14;1273:34;;;1303:1;1300;1293:12;1273:34;1341:6;1330:9;1326:22;1316:32;;1386:7;1379:4;1375:2;1371:13;1367:27;1357:55;;1408:1;1405;1398:12;1357:55;1444:2;1431:16;1466:2;1462;1459:10;1456:36;;;1472:18;;:::i;:::-;1547:2;1541:9;1515:2;1601:13;;-1:-1:-1;;1597:22:18;;;1621:2;1593:31;1589:40;1577:53;;;1645:18;;;1665:22;;;1642:46;1639:72;;;1691:18;;:::i;:::-;1731:10;1727:2;1720:22;1766:2;1758:6;1751:18;1806:7;1801:2;1796;1792;1788:11;1784:20;1781:33;1778:53;;;1827:1;1824;1817:12;1778:53;1883:2;1878;1874;1870:11;1865:2;1857:6;1853:15;1840:46;1928:1;1906:15;;;1923:2;1902:24;1895:35;;;;-1:-1:-1;1910:6:18;1039:922;-1:-1:-1;;;;;1039:922:18:o;1966:380::-;2045:1;2041:12;;;;2088;;;2109:61;;2163:4;2155:6;2151:17;2141:27;;2109:61;2216:2;2208:6;2205:14;2185:18;2182:38;2179:161;;2262:10;2257:3;2253:20;2250:1;2243:31;2297:4;2294:1;2287:15;2325:4;2322:1;2315:15;2179:161;;1966:380;;;:::o;2477:545::-;2579:2;2574:3;2571:11;2568:448;;;2615:1;2640:5;2636:2;2629:17;2685:4;2681:2;2671:19;2755:2;2743:10;2739:19;2736:1;2732:27;2726:4;2722:38;2791:4;2779:10;2776:20;2773:47;;;-1:-1:-1;2814:4:18;2773:47;2869:2;2864:3;2860:12;2857:1;2853:20;2847:4;2843:31;2833:41;;2924:82;2942:2;2935:5;2932:13;2924:82;;;2987:17;;;2968:1;2957:13;2924:82;;;2928:3;;;2568:448;2477:545;;;:::o;3198:1352::-;3324:3;3318:10;3351:18;3343:6;3340:30;3337:56;;;3373:18;;:::i;:::-;3402:97;3492:6;3452:38;3484:4;3478:11;3452:38;:::i;:::-;3446:4;3402:97;:::i;:::-;3554:4;;3618:2;3607:14;;3635:1;3630:663;;;;4337:1;4354:6;4351:89;;;-1:-1:-1;4406:19:18;;;4400:26;4351:89;-1:-1:-1;;3155:1:18;3151:11;;;3147:24;3143:29;3133:40;3179:1;3175:11;;;3130:57;4453:81;;3600:944;;3630:663;2424:1;2417:14;;;2461:4;2448:18;;-1:-1:-1;;3666:20:18;;;3784:236;3798:7;3795:1;3792:14;3784:236;;;3887:19;;;3881:26;3866:42;;3979:27;;;;3947:1;3935:14;;;;3814:19;;3784:236;;;3788:3;4048:6;4039:7;4036:19;4033:201;;;4109:19;;;4103:26;-1:-1:-1;;4192:1:18;4188:14;;;4204:3;4184:24;4180:37;4176:42;4161:58;4146:74;;4033:201;-1:-1:-1;;;;;4280:1:18;4264:14;;;4260:22;4247:36;;-1:-1:-1;3198:1352:18:o",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "setFile(string)": "e423c158",
+    "userFiles(address)": "b0b19072"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.15+commit.e14f2714\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"file\",\"type\":\"string\"}],\"name\":\"setFile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userFiles\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/IpfsStorage.sol\":\"IpfsStorage\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":forge-std/=lib/forge-std/src/\"]},\"sources\":{\"src/IpfsStorage.sol\":{\"keccak256\":\"0xe048fd97504870d9a1409fcba1d95e502f558be02598a5f3305d44d3f117a189\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://a484d673b3ca608c5ae438793b03c83e9262d3871d64617af13a25d5c220a578\",\"dweb:/ipfs/QmZYJXFqHE6DbF6CeFuycWk9P6Yr64yaCEmWkFPM7g7SEw\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.15+commit.e14f2714"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "file",
+              "type": "string"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setFile"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "userFiles",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "",
+              "type": "string"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":forge-std/=lib/forge-std/src/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "src/IpfsStorage.sol": "IpfsStorage"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "src/IpfsStorage.sol": {
+        "keccak256": "0xe048fd97504870d9a1409fcba1d95e502f558be02598a5f3305d44d3f117a189",
+        "urls": [
+          "bzz-raw://a484d673b3ca608c5ae438793b03c83e9262d3871d64617af13a25d5c220a578",
+          "dweb:/ipfs/QmZYJXFqHE6DbF6CeFuycWk9P6Yr64yaCEmWkFPM7g7SEw"
+        ],
+        "license": "Unlicense"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "src/IpfsStorage.sol",
+    "id": 24744,
+    "exportedSymbols": {
+      "IpfsStorage": [
+        24743
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "38:197:16",
+    "nodes": [
+      {
+        "id": 24725,
+        "nodeType": "PragmaDirective",
+        "src": "38:24:16",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ]
+      },
+      {
+        "id": 24743,
+        "nodeType": "ContractDefinition",
+        "src": "64:171:16",
+        "nodes": [
+          {
+            "id": 24729,
+            "nodeType": "VariableDeclaration",
+            "src": "91:44:16",
+            "nodes": [],
+            "constant": false,
+            "functionSelector": "b0b19072",
+            "mutability": "mutable",
+            "name": "userFiles",
+            "nameLocation": "126:9:16",
+            "scope": 24743,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_string_storage_$",
+              "typeString": "mapping(address => string)"
+            },
+            "typeName": {
+              "id": 24728,
+              "keyType": {
+                "id": 24726,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "100:7:16",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "91:27:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_string_storage_$",
+                "typeString": "mapping(address => string)"
+              },
+              "valueType": {
+                "id": 24727,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "111:6:16",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "id": 24742,
+            "nodeType": "FunctionDefinition",
+            "src": "142:91:16",
+            "nodes": [],
+            "body": {
+              "id": 24741,
+              "nodeType": "Block",
+              "src": "188:45:16",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 24739,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "baseExpression": {
+                        "id": 24734,
+                        "name": "userFiles",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 24729,
+                        "src": "198:9:16",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_string_storage_$",
+                          "typeString": "mapping(address => string storage ref)"
+                        }
+                      },
+                      "id": 24737,
+                      "indexExpression": {
+                        "expression": {
+                          "id": 24735,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -15,
+                          "src": "208:3:16",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 24736,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "src": "208:10:16",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "198:21:16",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 24738,
+                      "name": "file",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 24731,
+                      "src": "222:4:16",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "src": "198:28:16",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 24740,
+                  "nodeType": "ExpressionStatement",
+                  "src": "198:28:16"
+                }
+              ]
+            },
+            "functionSelector": "e423c158",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setFile",
+            "nameLocation": "151:7:16",
+            "parameters": {
+              "id": 24732,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24731,
+                  "mutability": "mutable",
+                  "name": "file",
+                  "nameLocation": "173:4:16",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 24742,
+                  "src": "159:18:16",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 24730,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "159:6:16",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "158:20:16"
+            },
+            "returnParameters": {
+              "id": 24733,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "188:0:16"
+            },
+            "scope": 24743,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IpfsStorage",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          24743
+        ],
+        "name": "IpfsStorage",
+        "nameLocation": "73:11:16",
+        "scope": 24744,
+        "usedErrors": []
+      }
+    ],
+    "license": "Unlicense"
+  },
+  "id": 16
+}
