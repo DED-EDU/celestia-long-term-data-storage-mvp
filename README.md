@@ -130,3 +130,4 @@ The final step is setting up Metamask with a new network for Ethermint on RPC_UR
 
 I have also included a short clip of the user story (upload of a file to IPFS and CID resolution to display content) as follows:
 
+https://user-images.githubusercontent.com/33232379/205629365-5ae693a1-9ba7-4416-b867-d12b765ebe1c.mov
