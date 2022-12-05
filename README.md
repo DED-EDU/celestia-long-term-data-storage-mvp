@@ -127,3 +127,6 @@ Now we can move on to UI development. Since this is a bit out of scope I won't g
 The final step is setting up Metamask with a new network for Ethermint on RPC_URL 9545. This is to ensure the contract address is recognized properly. In order to have funds to run the contract calls we can import a new account using our anvil private key. As follows is a visual of how the network addition process should work:
 
 <img width="346" alt="Screen Shot 2022-12-05 at 6 12 36 AM" src="https://user-images.githubusercontent.com/33232379/205623697-9e68ca0f-3aaa-4072-b38a-93447a6e0880.png">
+
+I have also included a short clip of the user story (upload of a file to IPFS and CID resolution to display content) as follows:
+
