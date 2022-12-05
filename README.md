@@ -11,7 +11,7 @@ Long-Term Data Storage with Celestia Rollups using Ethermint
 Create a Solidity smart contract that our IPFS hash/content identifier (CID) can be stored in. Ours looks similar to this:
 
 ```
-// SPDX-License-Identifier: Unlicense
+// SPDX-License-Identifier: Unlicensed
 pragma solidity ^0.8.13;
 
 contract Storage {
@@ -26,7 +26,7 @@ contract Storage {
 Deploy this contract on Ethermint with a script similar to the following:
 
 ```
-// SPDX-License-Identifier: Unlicense
+// SPDX-License-Identifier: Unlicensed
 pragma solidity ^0.8.13;
 
 import "forge-std/Script.sol";
@@ -124,4 +124,6 @@ async function uploadFile(file) {
 
 Now we can move on to UI development. Since this is a bit out of scope I won't go delve too deep, but the code can be viewed in full within this repository.
 
-The final step is setting up Metamask with a new network for Ethermint on RPC url 8545. This is to ensure the contract address is recognized properly. In order to have funds to run the contract calls we can import a new account using our anvil private key.
+The final step is setting up Metamask with a new network for Ethermint on RPC_URL 9545. This is to ensure the contract address is recognized properly. In order to have funds to run the contract calls we can import a new account using our anvil private key. As follows is a visual of how the network addition process should work:
+
+<img width="346" alt="Screen Shot 2022-12-05 at 6 12 36 AM" src="https://user-images.githubusercontent.com/33232379/205623697-9e68ca0f-3aaa-4072-b38a-93447a6e0880.png">
