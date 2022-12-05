@@ -136,4 +136,4 @@ https://user-images.githubusercontent.com/33232379/205629365-5ae693a1-9ba7-4416-
 
 #### Navigating through this repository
 
-The foundry setup for this project can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-contracts) while the frontend can be found [here]()
+The foundry setup for this project can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-contracts) while the frontend can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-dapp)
