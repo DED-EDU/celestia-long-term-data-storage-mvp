@@ -106,7 +106,7 @@ async function readCurrentUserFile() {
 }
 ```
 
-The next functions created willl be ```uploadFile()```, which uploads a file using our IPFS node, and ```setFile()``` that stores our IPFS hash/CID inside our function once an upload is successful. As follows is an example of what the aforementioned functions look like:
+The next functions created will be ```uploadFile()```, which uploads a file using our IPFS node, and ```setFile()``` that stores our IPFS hash/CID inside our function once an upload is successful. As follows is an example of what the aforementioned functions look like:
 
 ```
 async function setFile(hash) {
