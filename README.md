@@ -44,6 +44,8 @@ contract StorageScript is Script {
 }
 ```
 
+https://user-images.githubusercontent.com/33232379/205630372-4f51147f-e573-4629-a771-a9213d5814d1.mov
+
 Once met with a successful deployment, we can begin creating the frontend. Be sure to keep track of your contract(s) deployment address as we will need that in a bit.
 
 We'll be using [create-eth-app](https://github.com/paulrberg/create-eth-app) to scaffold a development environment. Once we are within the proper directory, it is quite important to add the latest stable version of IPFS.
