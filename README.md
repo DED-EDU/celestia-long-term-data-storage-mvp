@@ -293,6 +293,27 @@ async function storeFiles (files) {
 }
 ```
 
+Once files are uploaded they can be retireved like so:
+
+```javascript
+async function retrieveFiles (cid) {
+  const client = makeStorageClient()
+  const res = await client.get(cid)
+  console.log(`Got a response! [${res.status}] ${res.statusText}`)
+  if (!res.ok) {
+    throw new Error(`failed to get ${cid} - [${res.status}] ${res.statusText}`)
+  }
+
+  // unpack File objects from the response
+  const files = await res.files()
+  for (const file of files) {
+    console.log(`${file.cid} -- ${file.path} -- ${file.size}`)
+  }
+}
+```
+
+
+
 ###### Navigating through this repository
 
 The foundry setup for this project can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-contracts) while the frontend can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-dapp)
