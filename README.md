@@ -134,6 +134,17 @@ I have also included a short clip of the user story (upload of a file to IPFS an
 
 https://user-images.githubusercontent.com/33232379/205629365-5ae693a1-9ba7-4416-b867-d12b765ebe1c.mov
 
-#### Navigating through this repository
+
+#### Extending Functionality to a Decentralized Education Development Learning Session
+
+##### Artifacts
+
+```
+
+```
+
+
+
+###### Navigating through this repository
 
 The foundry setup for this project can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-contracts) while the frontend can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-dapp)
