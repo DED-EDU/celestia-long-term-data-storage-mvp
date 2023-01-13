@@ -74,7 +74,12 @@ contract learningSession {
     @dev A mapping of ids to the Artifact structs
     */
     mapping(uint256 => Artifact) private artifacts;
-
+    
+    
+    /// @notice This event is emitted when a new Artifact is created
+    /// @param id The artifact id.
+    /// @param parentId The parent id.
+    /// @param author The author.
     event NewArtifact(
         uint256 indexed id,
         uint256 indexed parentId,
