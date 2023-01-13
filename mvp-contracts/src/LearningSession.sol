@@ -4,13 +4,13 @@ pragma abicoder v2;
 
 import "lib/openzeppelin-contracts/contracts/utils/Counters.sol";
 
-/// @title learningSession
+/// @title LearningSession
 /// @author Harris Levine (@pynchmeister)
 /// @notice This contract is to be used in the context of DED Arbitration, once a learning sessions is completed.
-contract learningSession {
+contract LearningSession {
     using Counters for Counters.Counter;
 
-    enum learningSessionArtifact {
+    enum LearningSessionArtifact {
         VIDEO,
         COMMENT
     }
@@ -29,7 +29,7 @@ contract learningSession {
     */
     struct Artifact {
 
-        learningSessionArtifact type;
+        LearningSessionArtifact type;
 
         uint256 id;
 
@@ -94,7 +94,7 @@ contract learningSession {
         address author = msg.sender;
 
         uint256[] memory childIds;
-        artifacts[id] = Artifact(learningSessionArtifact.VIDEO, id, 0, author, block.number, childIds, CID);
+        artifacts[id] = Artifact(LearningSessionArtifact.VIDEO, id, 0, author, block.number, childIds, CID);
         emit NewArtifact(id, 0, author);
 
     }
@@ -121,7 +121,7 @@ contract learningSession {
         artifacts[parentId].childIds.push(id);
 
         uint256[] memory childIds;
-        artifacts[id] = Artifact(learningSessionArtifact.COMMENT, id, parentId, author, block.number, childIds, CID);
+        artifacts[id] = Artifact(LearningSessionArtifact.COMMENT, id, parentId, author, block.number, childIds, CID);
         emit NewArtifact(id, parentId, author);
     }
     
