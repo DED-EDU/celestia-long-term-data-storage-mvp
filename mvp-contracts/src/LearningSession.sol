@@ -102,7 +102,7 @@ contract LearningSession {
     /// @notice Supply an aritfact id and return the Artifact struct it is assigned to 
     /// @param artifactId The unique id of an artifact
     /// @return Artifact (struct) in memory
-    function getItem(uint256 artifactId) public view returns (Artifact memory) {
+    function getArtifact(uint256 artifactId) public view returns (Artifact memory) {
         require(artifacts[artifactId].id == artifactId, "Artifact does not exist");
         return artifacts[artifactId];
     }
