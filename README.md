@@ -137,11 +137,44 @@ https://user-images.githubusercontent.com/33232379/205629365-5ae693a1-9ba7-4416-
 
 #### Extending Functionality to a Decentralized Education Development Learning Session
 
+A LearningSession smart contract is deployed with Rollkit + Ethermint, in the same fashion as is aforementioned with the Storage contract. This enables DED 'Students' to upload an "Artifact" of their learning session: most often a video. Once uploaded 'Arbitrators' may comment and vote on the validity of whether a given learning session's goal(s) was accomplished.
+
 ##### Artifacts
 
-```
+```solidity 
+    /**  
+    /*
+    @notice A struct containing the learning session artifact info
+    
+    
+    @param type of artifact whether it be a video of the learning session or a comment on a video artifact thread
+    @param id of the artifact
+    @param parentId of the id uint256 hierarchly
+    @param author address of the comment or video poster
+    @param createdAtBlock time when the artifact was created
+    @param childIds array of child artifacts
+    @param CID content identifer - this is the cryptographic hash of the artifact content
+    */
+    struct Artifact {
+
+        LearningSessionArtifact type;
+
+        uint256 id;
+
+        uint256 parentId;
+
+        address author;
+
+        uint256 createdAtBlock;
+
+        uint256[] childIds;
+
+        string CID;
+    }
 
 ```
+
+
 
 
 
