@@ -174,10 +174,25 @@ A LearningSession smart contract is deployed with Rollkit + Ethermint, in the sa
 
 ```
 
+The ```Artifact``` has a ```type``` field that can have two options as can be seen below:
 
+```solidity
 
+ enum LearningSessionArtifact {
+        VIDEO,
+        COMMENT
+    }
+    
+```
 
+When a user adds a comment on a post, that comment is connected to the original post (or comment) through a parentId field. The parent post or comment will then have a list of its child comments in a childIds field. When a new comment is added, the parent's childIds list is updated to include the new comment.
 
-###### Navigating through this repository
+The text or information in a post or comment is saved as a JSON file in both IPFS and Filecoin by using Web3.Storage. The content identifier of that file, called a CID, is then stored in a field named CID.
+
+To view a comment or post, you can use a contract function called getArtifact and input the ucontent identifier of the item. After this, you will need to obtain the content from IPFS, then interpret the JSON file in order to fully display the item.
+
+###### Reputation / Voting
+
+####### Navigating through this repository
 
 The foundry setup for this project can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-contracts) while the frontend can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-dapp)
