@@ -271,6 +271,10 @@ forge script script/LearningSession.s.sol:LearningSessionScript --fork-url \
 $RPC_URL  --private-key $ANVIL_KEY --broadcast
 ```
 
+Moving onto the frontend development, as instructed above we will also need to import the json file for ```LearningSession.sol``` into abis.js file, and then instantiate it in the object body. Also like before, we need to paste the address of the deployed LearningSession.sol in addresses.js.
+
+Using Web3.Storage, all artifacts (videos and comments) are stored on IPFS and Filecoin -- the ids and votes / reputation is store within our ```LearningSession.sol``` contract.
+
 
 ###### Navigating through this repository
 
