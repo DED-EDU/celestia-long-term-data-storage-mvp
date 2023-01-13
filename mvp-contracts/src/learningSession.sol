@@ -5,7 +5,7 @@ pragma abicoder v2;
 import "lib/openzeppelin-contracts/contracts/utils/Counters.sol";
 
 /// @title A simulator for trees
-/// @author Harris (@pynchmeister)
+/// @author Harris Levine (@pynchmeister)
 /// @notice This contract is to be used in the context of DED Arbitration, once a learning sessions is completed.
 contract learningSession {
     using Counters for Counters.Counter;
@@ -14,7 +14,17 @@ contract learningSession {
         VIDEO,
         COMMENT
     }
-
+    
+    /**  
+    A struct containing the learning session artifact info
+    @param type of artifact whether it be a video of the learning session or a comment on a video artifact thread
+    @param id of the artifact
+    @param parentId of the id uint256 hierarchly
+    @param author address of the comment or video poster
+    @param createdAtBlock time when the artifact was created
+    @param childIds array of child artifacts
+    @param CID content identifer - this is the cryptographic hash of the artifact content
+    */
     struct Artifact {
 
         learningSessionArtifact type;
@@ -29,7 +39,7 @@ contract learningSession {
 
         uint256[] childIds;
 
-        string contentCID;
+        string CID;
     }
 
     struct VoteCount {
@@ -46,7 +56,7 @@ contract learningSession {
 
     mapping(address => int256) private authorReputation;
 
-    mapping(uint256 => Item) private artifacts;
+    mapping(uint256 => Artifact) private artifacts;
 
     event NewArtifact(
         uint256 indexed id,
@@ -55,14 +65,14 @@ contract learningSession {
     );
     
     /// @notice Add learning session artifact and emit NewArtifact event
-    /// @param contentCID The content identfiier (CID) of the learning session video artifact
-    function addSessionArtifact(string memory contentCID) public {
+    /// @param CID The content identfiier (CID) of the learning session video artifact
+    function addSessionArtifact(string memory CID) public {
         artifactIdCounter.increment();
         uint256 id = artifactIdCounter.current();
         address author = msg.sender;
 
         uint256[] memory childIds;
-        artifacts[id] = Artifact(learningSessionArtifact.VIDEO, id, 0, author, block.number, childIds, contentCID);
+        artifacts[id] = Artifact(learningSessionArtifact.VIDEO, id, 0, author, block.number, childIds, CID);
         emit NewArtifact(id, 0, author);
 
     }
@@ -75,9 +85,11 @@ contract learningSession {
         return artifacts[artifactId];
     }
     
-    /// @notice Supply a parent id and contentCID to add a comment to a learning session artifact and emit a NewArtifact event
-    /// @param parentId The unique id of the parent artifact, contentCID The content identfiier (CID) of the learning session video artifact
-    function addComment(uint256 parentId, string memory contentCID) public {
+    /// @notice Supply a parent id and CID to add a comment to a learning session artifact and emit a NewArtifact 
+    /// event
+    /// @param parentId The unique id of the parent artifact, CID The content identfiier (CID) of the learning session
+    /// video artifact
+    function addComment(uint256 parentId, string memory CID) public {
         require(artifacts[parentId].id == parentId, "Parent artifact does not exist");
 
         artifactIdCounter.increment();
@@ -87,12 +99,13 @@ contract learningSession {
         artifacts[parentId].childIds.push(id);
 
         uint256[] memory childIds;
-        artifacts[id] = Artifact(learningSessionArtifact.COMMENT, id, parentId, author, block.number, childIds, contentCID);
+        artifacts[id] = Artifact(learningSessionArtifact.COMMENT, id, parentId, author, block.number, childIds, CID);
         emit NewArtifact(id, parentId, author);
     }
     
     
-    /// @notice Supply an aritfact id and a vote value to assign successful or failed learning session (goal is either accomplished or not)
+    /// @notice Supply an aritfact id and a vote value to assign successful or failed learning session 
+    /// (goal is either accomplished or not)
     /// @dev This function is to be performed by (DED) 'Arbitrators'
     /// @param artifactId The unique id of an artifact, voteValue numeric value of the vote, can be -1, 0, or 1
     function vote(uint256 artifactId, int8 voteValue) public {
