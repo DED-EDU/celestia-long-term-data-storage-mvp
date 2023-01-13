@@ -277,6 +277,22 @@ Using Web3.Storage, all artifacts (videos and comments) are stored on IPFS and F
 
 As mentioned beforethis application leverages the ethers.js library as an interface for interfacing with the smart contract on the blockchain.
 
+Once Web3.Storage is imported into ```App.js``` you can utilize the following functions to upload:
+
+```javascript
+function getFiles () {
+  const fileInput = document.querySelector('input[type="file"]')
+  return fileInput.files
+}
+
+async function storeFiles (files) {
+  const client = makeStorageClient()
+  const cid = await client.put(files)
+  console.log('stored files with cid:', cid)
+  return cid
+}
+```
+
 ###### Navigating through this repository
 
 The foundry setup for this project can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-contracts) while the frontend can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-dapp)
