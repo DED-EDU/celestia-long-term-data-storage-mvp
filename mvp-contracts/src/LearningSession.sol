@@ -16,7 +16,7 @@ contract LearningSession {
     }
     
     /**  
-    A struct containing the learning session artifact info
+    @notice A struct containing the learning session artifact info
     
     
     @param type of artifact whether it be a video of the learning session or a comment on a video artifact thread
@@ -45,7 +45,7 @@ contract LearningSession {
     }
     
     /**  
-    A struct containing the VoteCount (reputation) info
+    @notice A struct containing the VoteCount (reputation) info
     
     
     @param votes mapping of voterIds to votes themselves
