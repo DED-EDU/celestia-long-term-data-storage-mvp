@@ -193,6 +193,14 @@ To view a comment or post, you can use a contract function called getArtifact an
 
 ##### Reputation / Voting
 
+Individuals can express their opinion on a learning session artifact or comment by using the vote(artifactId, voteValue) function, where voteValue can be -1 for a downvote, +1 for an upvote, or 0 to withdraw a previous vote.
+
+It is only possible for one vote per account per artifact or comment, any subsequent votes will replace the previous vote from that account.
+
+The total number of votes for a artifact or comment can be obtained by using the getArtifactScore(artifactId) function, which calculates the sum of all upvotes and downvotes.
+
+To find out the "reputation" or total number of votes received by an author for their artifacts and comments, use the getAuthorReputation(author) function by providing the author's address.
+
 ###### Navigating through this repository
 
 The foundry setup for this project can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-contracts) while the frontend can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-dapp)
