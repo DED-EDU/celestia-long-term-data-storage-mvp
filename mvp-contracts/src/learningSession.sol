@@ -4,7 +4,7 @@ pragma abicoder v2;
 
 import "lib/openzeppelin-contracts/contracts/utils/Counters.sol";
 
-/// @title A simulator for trees
+/// @title learningSession
 /// @author Harris Levine (@pynchmeister)
 /// @notice This contract is to be used in the context of DED Arbitration, once a learning sessions is completed.
 contract learningSession {
