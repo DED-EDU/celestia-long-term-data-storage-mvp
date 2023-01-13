@@ -12,9 +12,9 @@ contract learningSession {
         COMMENT
     }
 
-    struct Item {
+    struct Artifact {
 
-        learningSessionArtifact kind;
+        learningSessionArtifact type;
 
         uint256 id;
 
@@ -37,62 +37,62 @@ contract learningSession {
 
     }
 
-    Counters.Counter private itemIdCounter;
+    Counters.Counter private artifactIdCounter;
 
-    mapping(uint256 => VoteCount) private itemVotes;
+    mapping(uint256 => VoteCount) private artifactVotes;
 
     mapping(address => int256) private authorReputation;
 
-    mapping(uint256 => Item) private items;
+    mapping(uint256 => Item) private artifacts;
 
-    event NewItem(
+    event NewArtifact(
         uint256 indexed id,
         uint256 indexed parentId,
         address indexed author
     );
 
     function addSessionArtifact(string memory contentCID) public {
-        itemIdCounter.increment();
-        uint256 id = itemIdCounter.current();
+        artifactIdCounter.increment();
+        uint256 id = artifactIdCounter.current();
         address author = msg.sender;
 
         uint256[] memory childIds;
-        items[id] = Item(learningSessionArtifact.VIDEO, id, 0, author, block.number, childIds, contentCID);
-        emit NewItem(id, 0, author);
+        artifacts[id] = Artifact(learningSessionArtifact.VIDEO, id, 0, author, block.number, childIds, contentCID);
+        emit NewArtifact(id, 0, author);
 
     }
 
-    function getItem(uint256 itemId) public view returns (Item memory) {
-        require(items[itemId].id == itemId, "Item does not exist");
-        return items[itemId];
+    function getItem(uint256 artifactId) public view returns (Artifact memory) {
+        require(artifacts[artifactId].id == artifactId, "Artifact does not exist");
+        return artifacts[artifactId];
     }
 
     function addComment(uint256 parentId, string memory contentCID) public {
-        require(items[parentId].id == parentId, "Parent item does not exist");
+        require(artifacts[parentId].id == parentId, "Parent artifact does not exist");
 
-        itemIdCounter.increment();
-        uint256 id = itemIdCounter.current();
+        artifactIdCounter.increment();
+        uint256 id = artifactIdCounter.current();
         address author = msg.sender;
 
-        items[parentId].childIds.push(id);
+        artifacts[parentId].childIds.push(id);
 
         uint256[] memory childIds;
-        items[id] = Item(learningSessionArtifact.COMMENT, id, parentId, author, block.number, childIds, contentCID);
-        emit NewItem(id, parentId, author);
+        artifacts[id] = Artifact(learningSessionArtifact.COMMENT, id, parentId, author, block.number, childIds, contentCID);
+        emit NewArtifact(id, parentId, author);
     }
 
-    function vote(uint256 itemId, int8 voteValue) public {
-        require(items[itemId].id == itemId, "Item does not exist");
+    function vote(uint256 artifactId, int8 voteValue) public {
+        require(artifacts[artifactId].id == artifactId, "Artifact does not exist");
         require(voteValue >= -1 && voteValue <= 1, "Invalid vote value. Must be -1, 0, or 1");
 
         bytes32 voterId = _voterId(msg.sender);
-        int8 oldVote = itemVotes[itemId].votes[voterId];
+        int8 oldVote = artifactVotes[artifactId].votes[voterId];
 
         if (oldVote != voteValue) {
-            itemVotes[itemId].votes[voterId] = voteValue;
-            itemVotes[itemId].total = itemVotes[itemId].total - oldVote + voteValue;
+            artifactVotes[artifactId].votes[voterId] = voteValue;
+            artifactVotes[artifactId].total = artifactVotes[artifactId].total - oldVote + voteValue;
 
-            address author = items[itemId].author;
+            address author = artifacts[artifactId].author;
             if (author != msg.sender) {
                 authorReputation[author] = authorReputation[author] - oldVote + voteValue;
             }
@@ -100,8 +100,8 @@ contract learningSession {
 
     }
 
-    function getItemScore(uint256 itemId) public view returns (int256) {
-        return itemVotes[itemId].total;
+    function getArtifactScore(uint256 itemId) public view returns (int256) {
+        return artifactVotes[artifactId].total;
     }
 
     function getAuthorReputation(address author) public view returns (int256) {
