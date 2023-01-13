@@ -243,6 +243,35 @@ These functions can be viewed below:
     }
 ```
 
+To deploy our new contract, you can use the same solidity scripting format with ```forge``` as the Storage contract above.
+
+```solidity
+// SPDX-License-Identifier: Unlicensed
+pragma solidity ^0.8.13;
+
+import "forge-std/Script.sol";
+
+import {LearningSession} from "src/LearningSession.sol";
+
+contract LearningSessionScript is Script {
+    function setUp() public {}
+
+    function run() public {
+        vm.startBroadcast();
+        new LearningSession();
+        vm.stopBroadcast();
+    }
+}
+```
+
+Next you can deploy to Ethermint using the following ```forge``` command. Note: This part is covered in depth in the Ethermint tutorial linked in the prerequisites section above.
+
+```bash
+forge script script/LearningSession.s.sol:LearningSessionScript --fork-url \
+$RPC_URL  --private-key $ANVIL_KEY --broadcast
+```
+
+
 ###### Navigating through this repository
 
 The foundry setup for this project can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-contracts) while the frontend can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-dapp)
