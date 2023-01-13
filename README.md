@@ -10,7 +10,7 @@ Long-Term Data Storage with Celestia Rollups using Ethermint
 
 Create a Solidity smart contract that our IPFS hash/content identifier (CID) can be stored in. Ours looks similar to this:
 
-```
+```solidity
 // SPDX-License-Identifier: Unlicensed
 pragma solidity ^0.8.13;
 
@@ -25,7 +25,7 @@ contract Storage {
 
 Deploy this contract on Ethermint with a script similar to the following:
 
-```
+```solidity
 // SPDX-License-Identifier: Unlicensed
 pragma solidity ^0.8.13;
 
@@ -54,7 +54,7 @@ We will also need to navigate to the directory ```packages/contracts/src/abis```
 
 Next, navigate to ```packages/contracts/src/abis.js``` and add your newly created json as an import, and then instantiate it, like so:
 
-```
+```javascript
 import erc20Abi from "./abis/erc20.json";
 import ownableAbi from "./abis/ownable.json";
 import ipfsStorage from "./abis/Storage.json";
@@ -70,7 +70,7 @@ export default abis;
 
 Finally we need to navigate to ```addresses.js``` in the same directory and alter it like so:
 
-```
+```javascript
 const addresses = {
   storage: "0xdc64a140aa3e981100a9beca4e685f962f0cf6c9",
 };
@@ -82,7 +82,7 @@ We will now navigate to the ```react-app``` directory so that we can make our ed
 
 We can import IPFS and initialize the node like so:
 
-```
+```javascript
 import IPFS from "ipfs";
 
 async function initIpfs() {
@@ -96,7 +96,7 @@ We can add a function to read the current file from our Solidity smart contract.
 
 Here is an example of how that may look:
 
-```
+```javascript
 async function readCurrentUserFile() {
   const result = await storageContract.userFiles(
     defaultProvider.getSigner().getAddress()
@@ -108,7 +108,7 @@ async function readCurrentUserFile() {
 
 The next functions created will be ```uploadFile()```, which uploads a file using our IPFS node, and ```setFile()``` that stores our IPFS hash/CID inside our function once an upload is successful. As follows is an example of what the aforementioned functions look like:
 
-```
+```javascript
 async function setFile(hash) {
     const ipfsWithSigner = storageContract.connect(defaultProvider.getSigner());
     await ipfsWithSigner.setFile(hash);
