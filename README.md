@@ -191,8 +191,8 @@ The text or information in a post or comment is saved as a JSON file in both IPF
 
 To view a comment or post, you can use a contract function called getArtifact and input the ucontent identifier of the item. After this, you will need to obtain the content from IPFS, then interpret the JSON file in order to fully display the item.
 
-###### Reputation / Voting
+##### Reputation / Voting
 
-####### Navigating through this repository
+###### Navigating through this repository
 
 The foundry setup for this project can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-contracts) while the frontend can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-dapp)
