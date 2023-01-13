@@ -4,6 +4,9 @@ pragma abicoder v2;
 
 import "lib/openzeppelin-contracts/contracts/utils/Counters.sol";
 
+/// @title A simulator for trees
+/// @author Harris (@pynchmeister)
+/// @notice This contract is to be used in the context of DED Arbitration, once a learning sessions is completed.
 contract learningSession {
     using Counters for Counters.Counter;
 
@@ -50,7 +53,9 @@ contract learningSession {
         uint256 indexed parentId,
         address indexed author
     );
-
+    
+    /// @notice Add learning session artifact and emit NewArtifact event
+    /// @param contentCID The content identfiier (CID) of the learning session video artifact
     function addSessionArtifact(string memory contentCID) public {
         artifactIdCounter.increment();
         uint256 id = artifactIdCounter.current();
@@ -62,11 +67,16 @@ contract learningSession {
 
     }
 
+    /// @notice Supply an aritfact id and return the Artifact struct it is assigned to 
+    /// @param artifactId The unique id of an artifact
+    /// @return Artifact (struct) in memory
     function getItem(uint256 artifactId) public view returns (Artifact memory) {
         require(artifacts[artifactId].id == artifactId, "Artifact does not exist");
         return artifacts[artifactId];
     }
-
+    
+    /// @notice Supply a parent id and contentCID to add a comment to a learning session artifact and emit a NewArtifact event
+    /// @param parentId The unique id of the parent artifact, contentCID The content identfiier (CID) of the learning session video artifact
     function addComment(uint256 parentId, string memory contentCID) public {
         require(artifacts[parentId].id == parentId, "Parent artifact does not exist");
 
@@ -80,7 +90,11 @@ contract learningSession {
         artifacts[id] = Artifact(learningSessionArtifact.COMMENT, id, parentId, author, block.number, childIds, contentCID);
         emit NewArtifact(id, parentId, author);
     }
-
+    
+    
+    /// @notice Supply an aritfact id and a vote value to assign successful or failed learning session (goal is either accomplished or not)
+    /// @dev This function is to be performed by (DED) 'Arbitrators'
+    /// @param artifactId The unique id of an artifact, voteValue numeric value of the vote, can be -1, 0, or 1
     function vote(uint256 artifactId, int8 voteValue) public {
         require(artifacts[artifactId].id == artifactId, "Artifact does not exist");
         require(voteValue >= -1 && voteValue <= 1, "Invalid vote value. Must be -1, 0, or 1");
@@ -99,17 +113,27 @@ contract learningSession {
         }
 
     }
-
-    function getArtifactScore(uint256 itemId) public view returns (int256) {
+    
+    /// @notice Supply an artifactId  and return the accompanying Artifact repuation score
+    /// @param artifactId The unique id of an artifact
+    /// @return int256
+    function getArtifactScore(uint256 artifactId) public view returns (int256) {
         return artifactVotes[artifactId].total;
     }
-
+    
+    
+    /// @notice Supply an author address and return the reputation score of the Artifact
+    /// @param artifactId The address of an author
+    /// @return int256
     function getAuthorReputation(address author) public view returns (int256) {
         return authorReputation[author];
     }
 
-     function _voterId(address voter) internal pure returns (bytes32) {
-    return keccak256(abi.encodePacked(voter));
+    /// @notice Supply a voter address and return the associated voter id
+    /// @param voter The address of a voter
+    /// @return bytes32
+    function _voterId(address voter) internal pure returns (bytes32) {
+        return keccak256(abi.encodePacked(voter));
   }
 
 }
