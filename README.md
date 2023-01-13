@@ -275,7 +275,7 @@ Moving onto the frontend development, as instructed above we will also need to i
 
 Using Web3.Storage, all artifacts (videos and comments) are stored on IPFS and Filecoin -- the ids and votes / reputation are stored within our ```LearningSession.sol``` contract. Due to this, the user will require their own Web3.Storage API key.
 
-
+As mentioned beforethis application leverages the ethers.js library as an interface for interfacing with the smart contract on the blockchain.
 
 ###### Navigating through this repository
 
