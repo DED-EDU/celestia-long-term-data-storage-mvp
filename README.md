@@ -201,6 +201,48 @@ The total number of votes for a artifact or comment can be obtained by using the
 
 To find out the "reputation" or total number of votes received by an author for their artifacts and comments, use the getAuthorReputation(author) function by providing the author's address.
 
+These functions can be viewed below:
+
+```solidity
+/// @notice Supply an aritfact id and a vote value to assign successful or failed learning session 
+    /// (goal is either accomplished or not)
+    /// @dev This function is to be performed by (DED) 'Arbitrators'
+    /// @param artifactId The unique id of an artifact, voteValue numeric value of the vote, can be -1, 0, or 1
+    function vote(uint256 artifactId, int8 voteValue) public {
+        require(artifacts[artifactId].id == artifactId, "Artifact does not exist");
+        require(voteValue >= -1 && voteValue <= 1, "Invalid vote value. Must be -1, 0, or 1");
+
+        bytes32 voterId = _voterId(msg.sender);
+        int8 oldVote = artifactVotes[artifactId].votes[voterId];
+
+        if (oldVote != voteValue) {
+            artifactVotes[artifactId].votes[voterId] = voteValue;
+            artifactVotes[artifactId].total = artifactVotes[artifactId].total - oldVote + voteValue;
+
+            address author = artifacts[artifactId].author;
+            if (author != msg.sender) {
+                authorReputation[author] = authorReputation[author] - oldVote + voteValue;
+            }
+        }
+
+    }
+    
+   
+    /// @notice Supply an artifactId  and return the accompanying Artifact repuation score
+    /// @param artifactId The unique id of an artifact
+    /// @return int256
+    function getArtifactScore(uint256 artifactId) public view returns (int256) {
+        return artifactVotes[artifactId].total;
+    }
+    
+    /// @notice Supply an author address and return the reputation score of the Artifact
+    /// @param artifactId The address of an author
+    /// @return int256
+    function getAuthorReputation(address author) public view returns (int256) {
+        return authorReputation[author];
+    }
+```
+
 ###### Navigating through this repository
 
 The foundry setup for this project can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-contracts) while the frontend can be found [here](https://github.com/DED-EDU/celestia-long-term-data-storage-mvp/tree/main/mvp-dapp)
