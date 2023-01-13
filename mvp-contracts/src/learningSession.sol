@@ -17,6 +17,8 @@ contract learningSession {
     
     /**  
     A struct containing the learning session artifact info
+    
+    
     @param type of artifact whether it be a video of the learning session or a comment on a video artifact thread
     @param id of the artifact
     @param parentId of the id uint256 hierarchly
@@ -41,7 +43,14 @@ contract learningSession {
 
         string CID;
     }
-
+    
+    /**  
+    A struct containing the VoteCount (reputation) info
+    
+    
+    @param votes mapping of voterIds to votes themselves
+    @param total votes
+    */
     struct VoteCount {
 
         mapping(bytes32 => int8) votes;
@@ -51,11 +60,19 @@ contract learningSession {
     }
 
     Counters.Counter private artifactIdCounter;
-
+    
+    
+    /**  
+    @dev A mapping of votes to the VoteCount struct
+    */
     mapping(uint256 => VoteCount) private artifactVotes;
-
+    /**  
+    @dev A mapping of addresses to the votes (otherwise known as reputation)
+    */
     mapping(address => int256) private authorReputation;
-
+    /**  
+    @dev A mapping of ids to the Artifact structs
+    */
     mapping(uint256 => Artifact) private artifacts;
 
     event NewArtifact(
