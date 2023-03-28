@@ -4,6 +4,7 @@ import { useIpfs } from "./hooks/useIpfs";
 import { useBlockchain } from "./hooks/useBlockchain";
 
 import logo from "./ethereumLogo.png";
+import spinner from "./spinner.gif";
 import "./App.css";
 
 const App = () => {
@@ -42,29 +43,35 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <div {...getRootProps()} style={{ cursor: "pointer" }}>
-          <img src={logo} className="App-logo" alt="react-logo" />
+        <div {...getRootProps()} className="dropzone">
           <input {...getInputProps()} />
+          <img src={logo} className="App-logo" alt="react-logo" />
           {isDragActive ? (
-            <p>Drop the files here ...</p>
+            <p>Drop the file here to upload to IPFS</p>
           ) : (
-            <p>Click the logo to upload to IPFS</p>
+            <p>Click or drag a file here to upload to IPFS</p>
           )}
         </div>
-        <div>
-          {ipfsHash ? (
-            <a
-              href={`https://ipfs.io/ipfs/${ipfsHash}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              See current user file
-            </a>
-          ) : (
-            "No user file set yet"
-          )}
-        </div>
-        {loading && <div>Uploading file...</div>}
+        {loading ? (
+          <div>
+            <img src={spinner} className="spinner" alt="Loading" />
+            <p>Uploading file...</p>
+          </div>
+        ) : (
+          <div className="file-info">
+            {ipfsHash ? (
+              <a
+                href={`https://ipfs.io/ipfs/${ipfsHash}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                See current user file
+              </a>
+            ) : (
+              <p>No user file set yet</p>
+            )}
+          </div>
+        )}
         {errorMessage && <div className="error">{errorMessage}</div>}
       </header>
     </div>
