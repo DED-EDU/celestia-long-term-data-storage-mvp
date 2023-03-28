@@ -1,11 +1,10 @@
-//SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.13;
-pragma abicoder v2;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.15;
 
 import "lib/openzeppelin-contracts/contracts/utils/Counters.sol";
 
 /// @title LearningSession
-/// @author Harris Levine (@pynchmeister)
+/// @author Amnot (@pynchmeister)
 /// @notice This contract is to be used in the context of DED Arbitration, once a learning sessions is completed.
 contract LearningSession {
     using Counters for Counters.Counter;
@@ -14,6 +13,10 @@ contract LearningSession {
         VIDEO,
         COMMENT
     }
+    
+    /// @notice Custom errors
+    error ArtifactDoesNotExist();
+    error InvalidVoteValue();
     
     /**  
     @notice A struct containing the learning session artifact info
@@ -28,19 +31,12 @@ contract LearningSession {
     @param CID content identifer - this is the cryptographic hash of the artifact content
     */
     struct Artifact {
-
         LearningSessionArtifact type;
-
         uint256 id;
-
         uint256 parentId;
-
         address author;
-
         uint256 createdAtBlock;
-
         uint256[] childIds;
-
         string CID;
     }
     
@@ -52,11 +48,8 @@ contract LearningSession {
     @param total votes
     */
     struct VoteCount {
-
         mapping(bytes32 => int8) votes;
-
         int256 total;
-
     }
 
     Counters.Counter private artifactIdCounter;
@@ -103,7 +96,9 @@ contract LearningSession {
     /// @param artifactId The unique id of an artifact
     /// @return Artifact (struct) in memory
     function getArtifact(uint256 artifactId) public view returns (Artifact memory) {
-        require(artifacts[artifactId].id == artifactId, "Artifact does not exist");
+        if (artifacts[artifactId].id != artifactId) {
+            revert ArtifactDoesNotExist();
+        }        
         return artifacts[artifactId];
     }
     
@@ -131,8 +126,12 @@ contract LearningSession {
     /// @dev This function is to be performed by (DED) 'Arbitrators'
     /// @param artifactId The unique id of an artifact, voteValue numeric value of the vote, can be -1, 0, or 1
     function vote(uint256 artifactId, int8 voteValue) public {
-        require(artifacts[artifactId].id == artifactId, "Artifact does not exist");
-        require(voteValue >= -1 && voteValue <= 1, "Invalid vote value. Must be -1, 0, or 1");
+        if (artifacts[artifactId].id != artifactId) {
+            revert ArtifactDoesNotExist();
+        }
+        if (voteValue < -1 || voteValue > 1) {
+            revert InvalidVoteValue();
+        }
 
         bytes32 voterId = _voterId(msg.sender);
         int8 oldVote = artifactVotes[artifactId].votes[voterId];
