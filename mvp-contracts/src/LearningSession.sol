@@ -139,9 +139,27 @@ contract LearningSession {
     int8 oldVote = artifactVotes[artifactId].votes[voterId];
 
     // Obtain the storage slots for the mappings
-    uint256 artifactVotes_slot = uint256(keccak256(abi.encodePacked("artifactVotes", artifactId)));
-    uint256 authorReputation_slot = uint256(keccak256(abi.encodePacked("authorReputation")));
-    uint256 artifacts_slot = uint256(keccak256(abi.encodePacked("artifacts", artifactId)));
+    uint256 artifactVotes_slot;
+    assembly {
+        let memPtr := mload(0x40) // Get free memory pointer
+        mstore(memPtr, 0x6172746966616374566f74657300000000000000000000000000000000000000) // Store "artifactVotes" at memPtr
+        mstore(add(memPtr, 0x20), artifactId) // Store artifactId after "artifactVotes"
+        artifactVotes_slot := keccak256(memPtr, 0x40) // Calculate keccak256 hash using assembly
+    }
+    uint256 authorReputation_slot;
+    assembly {
+        let memPtr := mload(0x40) // Get free memory pointer
+        mstore(memPtr, 0x617574686f7252657075746174696f6e00000000000000000000000000000000) // Store "authorReputation" at memPtr
+        authorReputation_slot := keccak256(memPtr, 0x20) // Calculate keccak256 hash using assembly
+    }
+
+    uint256 artifacts_slot;
+    assembly {
+        let memPtr := mload(0x40) // Get free memory pointer
+        mstore(memPtr, 0x6172746966616374730000000000000000000000000000000000000000000000) // Store "artifacts" at memPtr
+        mstore(add(memPtr, 0x20), artifactId) // Store artifactId after "artifacts"
+        artifacts_slot := keccak256(memPtr, 0x40) // Calculate keccak256 hash using assembly
+    }
 
     assembly {
         // Check if oldVote is different from voteValue
@@ -187,6 +205,7 @@ contract LearningSession {
     /// @param voter The address of a voter
     /// @return bytes32
     function _voterId(address voter) internal pure returns (bytes32) {
-        return keccak256(abi.encodePacked(voter));
+        bytes32 result;
+        assembly { result := keccak256(add(voter, 0x20), 0x20) }
   }
 }
