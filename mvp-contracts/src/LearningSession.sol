@@ -16,13 +16,14 @@ contract LearningSession {
     
     /// @notice Custom errors
     error ArtifactDoesNotExist();
+    error ParentArtifactDoesNotExist();
     error InvalidVoteValue();
     
     /**  
     @notice A struct containing the learning session artifact info
     
     
-    @param type of artifact whether it be a video of the learning session or a comment on a video artifact thread
+    @param artifactType of artifact whether it be a video of the learning session or a comment on a video artifact thread
     @param id of the artifact
     @param parentId of the id uint256 hierarchly
     @param author address of the comment or video poster
@@ -31,7 +32,7 @@ contract LearningSession {
     @param CID content identifer - this is the cryptographic hash of the artifact content
     */
     struct Artifact {
-        LearningSessionArtifact type;
+        LearningSessionArtifact artifactType;
         uint256 id;
         uint256 parentId;
         address author;
@@ -81,7 +82,7 @@ contract LearningSession {
     
     /// @notice Add learning session artifact and emit NewArtifact event
     /// @param CID The content identfiier (CID) of the learning session video artifact
-    function addSessionArtifact(string memory CID) public {
+    function addSessionArtifact(string calldata CID) public {
         artifactIdCounter.increment();
         uint256 id = artifactIdCounter.current();
         address author = msg.sender;
@@ -106,9 +107,10 @@ contract LearningSession {
     /// event
     /// @param parentId The unique id of the parent artifact, CID The content identfiier (CID) of the learning session
     /// video artifact
-    function addComment(uint256 parentId, string memory CID) public {
-        require(artifacts[parentId].id == parentId, "Parent artifact does not exist");
-
+    function addComment(uint256 parentId, string calldata CID) public {
+        if (artifacts[parentId].id != parentId) {
+            revert ParentArtifactDoesNotExist();
+        }
         artifactIdCounter.increment();
         uint256 id = artifactIdCounter.current();
         address author = msg.sender;
@@ -126,27 +128,45 @@ contract LearningSession {
     /// @dev This function is to be performed by (DED) 'Arbitrators'
     /// @param artifactId The unique id of an artifact, voteValue numeric value of the vote, can be -1, 0, or 1
     function vote(uint256 artifactId, int8 voteValue) public {
-        if (artifacts[artifactId].id != artifactId) {
-            revert ArtifactDoesNotExist();
-        }
-        if (voteValue < -1 || voteValue > 1) {
-            revert InvalidVoteValue();
-        }
+    if (artifacts[artifactId].id != artifactId) {
+        revert ArtifactDoesNotExist();
+    }
+    if (voteValue < -1 || voteValue > 1) {
+        revert InvalidVoteValue();
+    }
 
-        bytes32 voterId = _voterId(msg.sender);
-        int8 oldVote = artifactVotes[artifactId].votes[voterId];
+    bytes32 voterId = _voterId(msg.sender);
+    int8 oldVote = artifactVotes[artifactId].votes[voterId];
 
-        if (oldVote != voteValue) {
-            artifactVotes[artifactId].votes[voterId] = voteValue;
-            artifactVotes[artifactId].total = artifactVotes[artifactId].total - oldVote + voteValue;
+    // Obtain the storage slots for the mappings
+    uint256 artifactVotes_slot = uint256(keccak256(abi.encodePacked("artifactVotes", artifactId)));
+    uint256 authorReputation_slot = uint256(keccak256(abi.encodePacked("authorReputation")));
+    uint256 artifacts_slot = uint256(keccak256(abi.encodePacked("artifacts", artifactId)));
 
-            address author = artifacts[artifactId].author;
-            if (author != msg.sender) {
-                authorReputation[author] = authorReputation[author] - oldVote + voteValue;
+    assembly {
+        // Check if oldVote is different from voteValue
+        if iszero(eq(oldVote, voteValue)) {
+            // Update the vote value in the votes mapping
+            sstore(add(artifactVotes_slot, voterId), voteValue)
+
+            // Calculate the updated total vote count
+            let total := add(sload(artifactVotes_slot), sub(voteValue, oldVote))
+            // Update the total vote count in the total mapping
+            sstore(artifactVotes_slot, total)
+
+            // Load the author address from the artifacts mapping
+            let author := sload(artifacts_slot)
+
+            // Check if author is not the same as the sender
+            if iszero(eq(author, caller())) {
+                // Calculate the updated author reputation
+                let reputation := add(sload(authorReputation_slot), sub(voteValue, oldVote))
+                // Update the author reputation in the authorReputation mapping
+                sstore(authorReputation_slot, reputation)
             }
         }
-
     }
+}
     
     /// @notice Supply an artifactId  and return the accompanying Artifact repuation score
     /// @param artifactId The unique id of an artifact
@@ -157,7 +177,7 @@ contract LearningSession {
     
     
     /// @notice Supply an author address and return the reputation score of the Artifact
-    /// @param artifactId The address of an author
+    /// @param author The address of an author
     /// @return int256
     function getAuthorReputation(address author) public view returns (int256) {
         return authorReputation[author];
@@ -169,5 +189,4 @@ contract LearningSession {
     function _voterId(address voter) internal pure returns (bytes32) {
         return keccak256(abi.encodePacked(voter));
   }
-
 }
