@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
+import IPFS from "ipfs";
 import { ethers } from "ethers";
 import LearningSession from "./artifacts/LearningSession.json"; // Import ABI
 import "./App.css";
@@ -14,6 +15,16 @@ const App = () => {
   const [artifactId, setArtifactId] = useState(""); // Artifact ID for adding comments
   const [voteArtifactId, setVoteArtifactId] = useState(""); // Artifact ID for voting
   const [voteValue, setVoteValue] = useState(0); // Vote value: -1, 0, or 1
+
+  const [ipfs, setIpfs] = useState(null);
+
+  useEffect(() => {
+    async function initIPFS() {
+      const ipfs = await IPFS.create();
+      setIpfs(ipfs);
+    }
+    initIPFS();
+  }, []);
 
   // Initialize contract instance
   const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -81,33 +92,49 @@ const App = () => {
             <p>Click the logo to upload to IPFS</p>
           )}
         </div>
-        <div>
-          <input
-            type="text"
-            placeholder="Artifact ID for comment (optional)"
-            value={artifactId}
-            onChange={(e) => setArtifactId(e.target.value)}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            placeholder="Artifact ID for vote"
-            value={voteArtifactId}VoteArtifactId(e.target.value)}
-          />
-      <select value={voteValue} onChange={(e) => setVoteValue(parseInt(e.target.value))}>
-      <option value={-1}>-1 (Downvote)</option>
-      <option value={0}>0 (Neutral)</option>
-      <option value={1}>1 (Upvote)</option>
-    </select>
-  <button onClick={submitVote}>Submit Vote</button>
-  </div>
-  {loading && <div>Loading...</div>}
+              <input        type="text"
+        placeholder="Artifact ID for adding comment (leave empty for new artifact)"
+        value={artifactId}
+        onChange={(e) => setArtifactId(e.target.value)}
+      />
+    </div>
+    <div>
+      {ipfsHash ? (
+        <a
+          href={`https://ipfs.io/ipfs/${ipfsHash}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          See current user file
+        </a>
+      ) : (
+        "No user file set yet"
+      )}
+    </div>
+    <div>
+      <input
+        type="text"
+        placeholder="Artifact ID for voting"
+        value={voteArtifactId}
+        onChange={(e) => setVoteArtifactId(e.target.value)}
+      />
+      <select
+        value={voteValue}
+        onChange={(e) => setVoteValue(parseInt(e.target.value))}
+      >
+        <option value={-1}>-1 (Downvote)</option>
+        <option value={0}>0 (Neutral)</option>
+        <option value={1}>1 (Upvote)</option>
+      </select>
+      <button onClick={submitVote}>Submit Vote</button>
+    </div>
+    {loading && <div>Loading...</div>}
     {errorMessage && <div className="error">{errorMessage}</div>}
   </header>
-  </div>
-  );
+</div>
+);
 };
 
 export default App;
-            onChange={(e) => set
+
+        <div
